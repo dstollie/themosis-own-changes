@@ -101,8 +101,10 @@ class Application extends Container {
     public function registerCoreIgniters()
     {
         $services = array(
-
+            '\Themosis\Action\ActionIgniterService',
+            '\Themosis\Ajax\AjaxIgniterService',
             '\Themosis\Asset\AssetIgniterService',
+            '\Themosis\Configuration\ConfigIgniterService',
             '\Themosis\Field\FieldIgniterService',
             '\Themosis\Html\FormIgniterService',
             '\Themosis\Html\HtmlIgniterService',
@@ -115,7 +117,6 @@ class Application extends Container {
             '\Themosis\User\UserIgniterService',
             '\Themosis\Validation\ValidationIgniterService',
             '\Themosis\View\ViewIgniterService'
-
         );
 
         foreach ($services as $service)
@@ -299,9 +300,13 @@ class Application extends Container {
 	public function registerCoreContainerAliases()
 	{
 		$aliases = array(
+            'action'            => 'Themosis\Action\ActionBuilder',
+            'ajax'              => 'Themosis\Ajax\AjaxBuilder',
 			'app'               => 'Themosis\Core\Application',
 			'asset'             => 'Themosis\Asset\AssetFactory',
 			'asset.finder'      => 'Themosis\Asset\AssetFinder',
+            'config'            => 'Themosis\Configuration\ConfigFactory',
+            'config.finder'     => 'Themosis\Configuration\ConfigFinder',
 			'field'             => 'Themosis\Field\FieldFactory',
 			'scout.compiler'    => 'Themosis\View\Compilers\ScoutCompiler',
 			'form'              => 'Themosis\Html\FormBuilder',

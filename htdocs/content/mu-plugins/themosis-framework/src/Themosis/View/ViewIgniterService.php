@@ -27,7 +27,7 @@ class ViewIgniterService extends IgniterService{
      *
      * @return void
      */
-    private function igniteEngineResolver()
+    protected function igniteEngineResolver()
     {
         $igniterService = $this;
 
@@ -53,7 +53,7 @@ class ViewIgniterService extends IgniterService{
      * @param \Themosis\View\Engines\EngineResolver $resolver
      * @return void
      */
-    private function registerPhpEngine($engine, EngineResolver $resolver)
+    protected function registerPhpEngine($engine, EngineResolver $resolver)
     {
         $resolver->register($engine, function(){
             return new PhpEngine();
@@ -67,7 +67,7 @@ class ViewIgniterService extends IgniterService{
      * @param \Themosis\View\Engines\EngineResolver $resolver
      * @return void
      */
-    private function registerScoutEngine($engine, EngineResolver $resolver)
+    protected function registerScoutEngine($engine, EngineResolver $resolver)
     {
         $app = $this->app;
 
@@ -91,12 +91,12 @@ class ViewIgniterService extends IgniterService{
      *
      * @return void
      */
-    private function igniteViewFinder()
+    protected function igniteViewFinder()
     {
         $this->app->bindShared('view.finder', function($app){
 
             // Paths to view directories.
-            $paths = apply_filters('themosisViewPaths', array());
+            $paths = apply_filters('themosisViewPaths', []);
 
             return new ViewFinder($paths);
 
@@ -109,11 +109,11 @@ class ViewIgniterService extends IgniterService{
      *
      * @return void
      */
-    private function igniteViewFactory()
+    protected function igniteViewFactory()
     {
         $this->app->bindShared('view', function($app){
 
-            $viewEnv = new ViewFactory($app['view.engine.resolver'], $app['view.finder']);
+            $viewEnv = new ViewFactory($app['view.engine.resolver'], $app['view.finder'], $app['action']);
 
             // Set the IoC container.
             $viewEnv->setContainer($app);
@@ -131,7 +131,7 @@ class ViewIgniterService extends IgniterService{
      *
      * @return void
      */
-    private function igniteLoop()
+    protected function igniteLoop()
     {
         $this->app->bindShared('loop', function($app){
 
