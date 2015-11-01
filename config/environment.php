@@ -5,7 +5,7 @@
 /*----------------------------------------------------*/
 return array(
 
-    'local'         => 'your-local-hostname',
+    'local'         => 'Denniss-MacBook-Pro.local',
     'production'    => 'your-production-hostname'
 
 );
